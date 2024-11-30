@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile
+# syntax=docker/dockerfile:1
 
 FROM docker.io/ubuntu:jammy AS base
 
