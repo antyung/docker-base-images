@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile
 
-FROM docker.io/alpine:3.19 AS base
+FROM docker.io/alpine:3.20 AS base
 
 RUN apk add --no-cache tzdata \
     && rm -rf /var/cache/apk/* \
