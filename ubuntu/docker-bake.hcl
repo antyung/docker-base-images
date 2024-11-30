@@ -37,7 +37,7 @@ target "build" {
   inherits = ["settings"]
   output   = ["type=docker"]
   tags = [
-    "${DOCKERHUB_USERNAME}/${IMAGE}",
+    "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
     "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
   ]
 }
@@ -50,7 +50,7 @@ target "push" {
     "linux/arm64",
   ]
   tags = [
-    "${DOCKERHUB_USERNAME}/${IMAGE}",
+    "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
     "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
   ]
 }
