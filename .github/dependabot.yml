@@ -10,7 +10,8 @@ registries:
   github-registry:
     type: docker-registry
     url: https://ghcr.io
-    token: ${{secrets.GH_TOKEN}}
+    username: ${{github.actor}}
+    password: ${{secrets.GH_TOKEN}}
 
 updates:
   - package-ecosystem: github-actions
