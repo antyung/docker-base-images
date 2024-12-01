@@ -46,8 +46,8 @@ jobs:
           echo "TAG=${TAG#v}" >> $GITHUB_ENV
           echo "TAG=${TAG#v}"
           BASE=$(sed -n 's/^FROM .*:\([^ -]*\)-\([^ -]*\).*/\2/p' ./${{env.IMAGE}}/Dockerfile.debian)
-          echo "TAG=${BASE}" >> $GITHUB_ENV
-          echo "TAG=${BASE}"
+          echo "BASE=${BASE}" >> $GITHUB_ENV
+          echo "BASE=${BASE}"
 
       - name: 'push'
         uses: docker/bake-action@v5
