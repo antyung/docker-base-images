@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'python/**'
+      - 'python/Dockerfile.alpine'
   workflow_dispatch:
 
 env:

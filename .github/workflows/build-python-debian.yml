@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'python/**'
+      - 'python/Dockerfile.debian'
   workflow_dispatch:
 
 env:
