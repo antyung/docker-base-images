@@ -1,16 +1,16 @@
 ---
-name: 'build alpine'
+name: 'build python-debian'
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'alpine/**'
+      - 'python/**'
   workflow_dispatch:
 
 env:
-  IMAGE: alpine
+  IMAGE: python
   DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
   DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
 
@@ -42,12 +42,15 @@ jobs:
       - name: 'extract version from dockerfile'
         id: extract_version
         run: |
-          TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile)
+          TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile.debian)
           echo "TAG=${TAG#v}" >> $GITHUB_ENV
           echo "TAG=${TAG#v}"
+          BASE=$(sed -n 's/^FROM .*:\([^ -]*\)-\([^ -]*\).*/\2/p' ./${{env.IMAGE}}/Dockerfile.debian)
+          echo "TAG=${BASE}" >> $GITHUB_ENV
+          echo "TAG=${BASE}"
 
       - name: 'push'
         uses: docker/bake-action@v5
         with:
-          targets: push
+          targets: push-debian
           workdir: ./${{env.IMAGE}}

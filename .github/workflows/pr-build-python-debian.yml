@@ -1,19 +1,19 @@
 ---
-name: 'pr-build debian'
+name: 'pr-build python-debian'
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - 'debian/**'
+      - 'python/**'
     types:
       - opened
       - synchronize
       - reopened
 
 env:
-  IMAGE: debian
+  IMAGE: python
   GH_TOKEN: ${{secrets.GH_TOKEN}}
 
 permissions:
@@ -39,7 +39,7 @@ jobs:
       - name: 'test'
         uses: docker/bake-action@v5
         with:
-          targets: test
+          targets: test-debian
           workdir: ./${{env.IMAGE}}
 
       - name: 'dependabot metadata'

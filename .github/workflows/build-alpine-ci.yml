@@ -22,7 +22,6 @@ jobs:
   build-push:
     runs-on: ubuntu-latest
     steps:
-
       - name: 'checkout'
         uses: actions/checkout@v4
         with:
@@ -43,7 +42,7 @@ jobs:
       - name: 'extract version from dockerfile'
         id: extract_version
         run: |
-          TAG=$(sed -n 's/^FROM .*:\([^ ]*\)\s*.*/\1/p' ./${{env.IMAGE}}/Dockerfile)
+          TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile)
           echo "TAG=${TAG#v}" >> $GITHUB_ENV
           echo "TAG=${TAG#v}"
 
