@@ -15,7 +15,6 @@ env:
   DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
