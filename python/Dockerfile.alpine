@@ -16,7 +16,7 @@ ENV PATH="$POETRY_HOME/bin:$POETRY_HOME/venv/bin:$PATH"
 FROM base AS build
 
 RUN apk add --no-cache curl \
-    && curl -sSL https://install.python-poetry.org | python3 -
+    && curl -fsSL https://install.python-poetry.org | python3 -
 
 FROM base AS final
 

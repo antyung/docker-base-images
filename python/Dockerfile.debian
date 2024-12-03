@@ -17,7 +17,7 @@ FROM base AS build
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends curl \
-    && curl -sSL https://install.python-poetry.org | python3 -
+    && curl -fsSL https://install.python-poetry.org | python3 -
 
 FROM base AS final
 
