@@ -44,7 +44,7 @@ updates:
       - github-registry
 
   - package-ecosystem: docker
-    directories: 
+    directories:
       - "/alpine"
     schedule:
       interval: daily
@@ -55,7 +55,7 @@ updates:
       - dockerhub-registry
 
   - package-ecosystem: docker
-    directories: 
+    directories:
       - "/alpine-ci"
     schedule:
       interval: daily
@@ -66,18 +66,7 @@ updates:
       - dockerhub-registry
 
   - package-ecosystem: docker
-    directories: 
-      - "/ubuntu"
-    schedule:
-      interval: daily
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-    registries:
-      - dockerhub-registry
-
-  - package-ecosystem: docker
-    directories: 
+    directories:
       - "/debian"
     schedule:
       interval: daily
@@ -88,8 +77,19 @@ updates:
       - dockerhub-registry
 
   - package-ecosystem: docker
-    directories: 
+    directories:
       - "/python"
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    registries:
+      - dockerhub-registry
+
+  - package-ecosystem: docker
+    directories:
+      - "/ubuntu"
     schedule:
       interval: daily
     commit-message:

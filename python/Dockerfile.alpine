@@ -2,18 +2,13 @@
 
 FROM docker.io/python:3.13.0-alpine AS base
 
-RUN apk add --no-cache tzdata \
-    && rm -rf /var/cache/apk/* \
-    && cp /usr/share/zoneinfo/Asia/Singapore /etc/localtime \
-    && echo "Asia/Singapore" > /etc/timezone
-
-ENV LANG="en_US.UTF-8" \
+ENV TZ="Asia/Singapore" \
+    LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
-    LC_ALL="en_US.UTF-8" \
-    PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
+    POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR="/opt/poetry/.cache" \
     POETRY_HOME="/opt/poetry"
 
 ENV PATH="$POETRY_HOME/bin:$POETRY_HOME/venv/bin:$PATH"
