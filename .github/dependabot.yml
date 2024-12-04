@@ -78,6 +78,17 @@ updates:
 
   - package-ecosystem: docker
     directories:
+      - "/node"
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    registries:
+      - dockerhub-registry
+
+  - package-ecosystem: docker
+    directories:
       - "/python"
     schedule:
       interval: daily
