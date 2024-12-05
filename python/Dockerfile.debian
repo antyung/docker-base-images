@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM docker.io/python:3.13.0-bullseye AS base
+FROM docker.io/python:3.13.1-bullseye AS base
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends locales-all \
