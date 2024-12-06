@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM docker.io/alpine:3.20 AS base
+FROM docker.io/alpine:3.21 AS base
 
 RUN apk add --no-cache \
     sudo bash git aws-cli curl ca-certificates jq \
