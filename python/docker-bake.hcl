@@ -3,7 +3,7 @@ variable "AWS_ECR_PUBLIC_URI" {
 }
 
 variable "GROUP" {
-  default "base"
+  default = "base"
 }
 
 variable "IMAGE" {
