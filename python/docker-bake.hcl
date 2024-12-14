@@ -70,6 +70,9 @@ target "push-alpine" {
     "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
     "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
     "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}-alpine",
+    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:latest",
+    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}",
+    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}-alpine",
   ]
 }
 
@@ -83,5 +86,6 @@ target "push-debian" {
   ]
   tags = [
     "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}-${BASE}",
+    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}-${BASE}",
   ]
 }

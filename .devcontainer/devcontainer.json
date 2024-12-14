@@ -1,11 +1,14 @@
 {
   "name": "base-images",
-  "dockerComposeFile": [
-    "./compose.yml"
-  ],
+  "dockerComposeFile": ["./compose.yml"],
   "service": "devcontainer-base-images",
   "remoteUser": "vscode",
   "shutdownAction": "stopCompose",
+  "workspaceFolder": "/home/vscode/base-images",
+  "features": {
+      "ghcr.io/antyung/devcontainers/common-utils:1": {},
+      "ghcr.io/antyung/devcontainers/docker-in-docker:1": {}
+  },
   "customizations": {
     "vscode": {
       "settings": {
@@ -13,10 +16,5 @@
       },
     "extensions": []
     }
-  },
-  "workspaceFolder": "/home/vscode/base-images",
-  "features": {
-      "ghcr.io/antyung/devcontainers/common-utils:1": {},
-      "ghcr.io/antyung/devcontainers/docker-in-docker:1": {}
   }
 }

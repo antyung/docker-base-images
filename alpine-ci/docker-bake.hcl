@@ -52,5 +52,7 @@ target "push" {
   tags = [
     "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
     "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
+    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:latest",
+    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}",
   ]
 }
