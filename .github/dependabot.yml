@@ -39,8 +39,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    registries:
-      - github-registry
+    registries: ["github-registry"]
 
   - package-ecosystem: docker
     directories:
