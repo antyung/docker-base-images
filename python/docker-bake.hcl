@@ -1,12 +1,16 @@
-variable "DOCKERHUB_USERNAME" {
-  default = "antyung"
+variable "AWS_ECR_PUBLIC_URI" {
+  default = "public.ecr.aws/w2u0w5i6"
+}
+
+variable "GROUP" {
+  default "base"
 }
 
 variable "IMAGE" {
   default = "python"
 }
 
-variable "BASE" {
+variable "IMAGE_BASE" {
   default = ""
 }
 
@@ -53,8 +57,8 @@ target "build" {
   dockerfile = "Dockerfile.alpine"
   output   = ["type=docker"]
   tags = [
-    "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
-    "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}",
   ]
 }
 
@@ -67,12 +71,9 @@ target "push-alpine" {
     "linux/arm64",
   ]
   tags = [
-    "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
-    "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
-    "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}-alpine",
-    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:latest",
-    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}",
-    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}-alpine",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}-alpine",
   ]
 }
 
@@ -85,7 +86,6 @@ target "push-debian" {
     "linux/arm64",
   ]
   tags = [
-    "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}-${BASE}",
-    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}-${BASE}",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}-${IMAGE_BASE}",
   ]
 }

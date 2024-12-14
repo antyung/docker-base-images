@@ -1,5 +1,9 @@
-variable "DOCKERHUB_USERNAME" {
-  default = "antyung"
+variable "AWS_ECR_PUBLIC_URI" {
+  default = "public.ecr.aws/w2u0w5i6"
+}
+
+variable "GROUP" {
+  default "base"
 }
 
 variable "IMAGE" {
@@ -37,8 +41,8 @@ target "build" {
   inherits = ["settings"]
   output   = ["type=docker"]
   tags = [
-    "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
-    "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}",
   ]
 }
 
@@ -50,9 +54,7 @@ target "push" {
     "linux/arm64",
   ]
   tags = [
-    "${DOCKERHUB_USERNAME}/${IMAGE}:latest",
-    "${DOCKERHUB_USERNAME}/${IMAGE}:${TAG}",
-    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:latest",
-    "public.ecr.aws/w2u0w5i6/base/${IMAGE}:${TAG}",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}",
   ]
 }
