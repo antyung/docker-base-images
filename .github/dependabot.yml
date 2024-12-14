@@ -55,7 +55,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    registries: ["aws-ecr-public-registry"]
+    registries: ["dockerhub-registry","aws-ecr-public-registry"]
 
   - package-ecosystem: docker
     directories:
@@ -65,7 +65,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    registries: ["aws-ecr-public-registry"]
+    registries: ["dockerhub-registry","aws-ecr-public-registry"]
 
   - package-ecosystem: docker
     directories:
@@ -75,7 +75,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    registries: ["aws-ecr-public-registry"]
+    registries: ["dockerhub-registry","aws-ecr-public-registry"]
 
   - package-ecosystem: docker
     directories:
@@ -85,7 +85,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    registries: ["aws-ecr-public-registry"]
+    registries: ["dockerhub-registry","aws-ecr-public-registry"]
 
   - package-ecosystem: docker
     directories:
@@ -95,7 +95,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    registries: ["aws-ecr-public-registry"]
+    registries: ["dockerhub-registry","aws-ecr-public-registry"]
 
   - package-ecosystem: docker
     directories:
@@ -105,4 +105,4 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    registries: ["aws-ecr-public-registry"]
+    registries: ["dockerhub-registry","aws-ecr-public-registry"]
