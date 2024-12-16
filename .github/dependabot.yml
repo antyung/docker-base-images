@@ -73,7 +73,8 @@ updates:
 
   - package-ecosystem: docker
     directories:
-      - "/node"
+      - "/node/Dockerfile.alpine"
+      - "/node/Dockerfile.debian"
     schedule:
       interval: daily
     commit-message:
@@ -83,7 +84,8 @@ updates:
 
   - package-ecosystem: docker
     directories:
-      - "/python"
+      - "/python/Dockerfile.alpine"
+      - "/python/Dockerfile.debian"
     schedule:
       interval: daily
     commit-message:
