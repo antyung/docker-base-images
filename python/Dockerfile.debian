@@ -10,23 +10,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 ENV TZ="Asia/Singapore" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
-    LC_ALL="en_US.UTF-8" \
-    POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR="/opt/poetry/.cache" \
-    POETRY_HOME="/opt/poetry"
-
-ENV PATH="${POETRY_HOME}/bin:${POETRY_HOME}/venv/bin:${PATH}"
-
-FROM base AS build
-
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y --no-install-recommends curl \
-    && curl -fsSL https://install.python-poetry.org | python3 -
-
-FROM base AS final
-
-COPY --from=build "${POETRY_HOME}" "${POETRY_HOME}"
+    LC_ALL="en_US.UTF-8"
 
 USER root
