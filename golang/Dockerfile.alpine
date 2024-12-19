@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM docker.io/golang:1.22-alpine AS base
+FROM docker.io/golang:1.23-alpine AS base
 
 ENV TZ="Asia/Singapore" \
     LANG="en_US.UTF-8" \
