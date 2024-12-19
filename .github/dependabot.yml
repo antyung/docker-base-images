@@ -46,6 +46,7 @@ updates:
       - "/alpine"
       - "/alpine-ci"
       - "/debian"
+      - "/golang"
       - "/node/**"
       - "/python/**"
       - "/ubuntu"
