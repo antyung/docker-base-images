@@ -1,12 +1,12 @@
 ---
-name: 'build golang'
+name: 'build golang-debian'
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'golang/**'
+      - 'golang/Dockerfile.debian'
   workflow_dispatch:
 
 env:
@@ -49,12 +49,15 @@ jobs:
       - name: 'extract version from dockerfile'
         id: extract_version
         run: |
-          TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile)
+          TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile.debian)
           echo "TAG=${TAG#v}" >> $GITHUB_ENV
           echo "TAG=${TAG#v}"
+          IMAGE_BASE=$(sed -n 's/^FROM .*:\([^ -]*\)-\([^ -]*\).*/\2/p' ./${{env.IMAGE}}/Dockerfile.debian)
+          echo "IMAGE_BASE=${IMAGE_BASE}" >> $GITHUB_ENV
+          echo "IMAGE_BASE=${IMAGE_BASE}"
 
       - name: 'push'
         uses: docker/bake-action@v5
         with:
-          targets: push
+          targets: push-debian
           workdir: ./${{env.IMAGE}}

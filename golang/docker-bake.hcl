@@ -10,6 +10,10 @@ variable "IMAGE" {
   default = "golang"
 }
 
+variable "IMAGE_BASE" {
+  default = ""
+}
+
 variable "TAG" {
   default = "latest"
 }
@@ -28,8 +32,19 @@ target "settings" {
   ]
 }
 
-target "test" {
+target "test-alpine" {
   inherits = ["settings"]
+  dockerfile = "Dockerfile.alpine"
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+  ]
+  tags = []
+}
+
+target "test-debian" {
+  inherits = ["settings"]
+  dockerfile = "Dockerfile.debian"
   platforms = [
     "linux/amd64",
     "linux/arm64",
@@ -39,6 +54,7 @@ target "test" {
 
 target "build" {
   inherits = ["settings"]
+  dockerfile = "Dockerfile.alpine"
   output   = ["type=docker"]
   tags = [
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
@@ -46,8 +62,9 @@ target "build" {
   ]
 }
 
-target "push" {
+target "push-alpine" {
   inherits = ["settings"]
+  dockerfile = "Dockerfile.alpine"
   output   = ["type=registry"]
   platforms = [
     "linux/amd64",
@@ -57,5 +74,18 @@ target "push" {
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}",
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}-alpine",
+  ]
+}
+
+target "push-debian" {
+  inherits = ["settings"]
+  dockerfile = "Dockerfile.debian"
+  output   = ["type=registry"]
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+  ]
+  tags = [
+    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${TAG}-${IMAGE_BASE}",
   ]
 }
