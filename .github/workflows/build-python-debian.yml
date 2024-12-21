@@ -49,9 +49,9 @@ jobs:
       - name: 'extract version from dockerfile'
         id: extract_version
         run: |
-          TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile.debian)
-          echo "TAG=${TAG#v}" >> $GITHUB_ENV
-          echo "TAG=${TAG#v}"
+          DOCKER_TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile.debian)
+          echo "DOCKER_TAG=${DOCKER_TAG#v}" >> $GITHUB_ENV
+          echo "DOCKER_TAG=${DOCKER_TAG#v}"
           IMAGE_BASE=$(sed -n 's/^FROM .*:\([^ -]*\)-\([^ -]*\).*/\2/p' ./${{env.IMAGE}}/Dockerfile.debian)
           echo "IMAGE_BASE=${IMAGE_BASE}" >> $GITHUB_ENV
           echo "IMAGE_BASE=${IMAGE_BASE}"
