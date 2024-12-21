@@ -39,7 +39,7 @@ target "test-alpine" {
     "linux/amd64",
     "linux/arm64",
   ]
-  DOCKER_TAGs = []
+  tags = []
 }
 
 target "test-debian" {
@@ -49,14 +49,14 @@ target "test-debian" {
     "linux/amd64",
     "linux/arm64",
   ]
-  DOCKER_TAGs = []
+  tags = []
 }
 
 target "build" {
   inherits = ["settings"]
   dockerfile = "Dockerfile.alpine"
   output   = ["type=docker"]
-  DOCKER_TAGs = [
+  tags = [
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
   ]
@@ -70,7 +70,7 @@ target "push-alpine" {
     "linux/amd64",
     "linux/arm64",
   ]
-  DOCKER_TAGs = [
+  tags = [
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}-alpine",
@@ -85,7 +85,7 @@ target "push-debian" {
     "linux/amd64",
     "linux/arm64",
   ]
-  DOCKER_TAGs = [
+  tags = [
     "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}-${IMAGE_BASE}",
   ]
 }
