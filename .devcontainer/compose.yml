@@ -4,6 +4,7 @@ services:
     container_name: devcontainer-base-images
     build:
       context: .
+    restart: unless-stopped
     volumes:
       - ..:/home/vscode/base-images:cached
     user: vscode
