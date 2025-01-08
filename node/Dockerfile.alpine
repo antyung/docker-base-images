@@ -10,7 +10,6 @@ ENV TZ="Asia/Singapore" \
 
 ENV PATH="${PNPM_HOME}:${PATH}"
 
-RUN corepack enable \
-    && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm typescript
 
 USER root
