@@ -10,6 +10,6 @@ ENV TZ="Asia/Singapore" \
 
 ENV PATH="${PNPM_HOME}:${PATH}"
 
-RUN npm install -g pnpm typescript
+RUN npm install -g pnpm
 
 USER root
