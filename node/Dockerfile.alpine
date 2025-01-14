@@ -2,6 +2,8 @@
 
 FROM docker.io/node:23.6.0-alpine AS base
 
+USER root
+
 ENV TZ="Asia/Singapore" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
@@ -11,5 +13,3 @@ ENV TZ="Asia/Singapore" \
 ENV PATH="${PNPM_HOME}:${PATH}"
 
 RUN npm install -g pnpm
-
-USER root
