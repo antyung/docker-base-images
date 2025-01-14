@@ -5,10 +5,10 @@ FROM docker.io/alpine:3.21 AS base
 USER root
 
 RUN apk add --no-cache \
-    sudo bash bash-completion shadow git aws-cli curl ca-certificates jq \
+    sudo bash bash-completion git aws-cli curl ca-certificates jq \
     && rm -rf /var/cache/apk/* \
     && ln -s /var/cache/apk /etc/apk/cache \
-    && chsh -s /bin/bash \
+    && sed -i 's#/bin/sh#/bin/bash#' /etc/passwd \
     && echo "complete -C $(which aws_completer) aws" > /etc/bash_completion.d/aws_completer.bash
 
 ENV TZ="Asia/Singapore" \
