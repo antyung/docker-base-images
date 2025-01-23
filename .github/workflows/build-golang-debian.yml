@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - 'golang/Dockerfile.debian'
+      - 'golang/docker-bake.hcl'
   workflow_dispatch:
 
 env:
