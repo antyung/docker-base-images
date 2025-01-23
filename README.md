@@ -10,7 +10,7 @@ The repository is configured to automatically update and rebuild Docker images u
 
 ## tests
 
-Use the go test -run flag to run a specific test, `-run regexp` Run only those tests and examples matching the regular expression.
+Use the `go test -run` flag to run a specific test, `-run '<regexp>'` run only those tests and examples matching the regular expression.
 
 ```
 go test -run 'TestBuild.*' ./... -v
