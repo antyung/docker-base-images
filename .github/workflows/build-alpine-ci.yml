@@ -10,9 +10,9 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE: alpine-ci
+  DOCKER_IMAGE: alpine-ci
   AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
-  AWS_ROLE_ARN: ${{secrets.AWS_ROLE_ARN}}
+  AWS_OIDC_ROLE_ARN: ${{secrets.AWS_OIDC_ROLE_ARN}}
 
 permissions:
   id-token: write
@@ -36,7 +36,7 @@ jobs:
       - name: 'configure aws credentials'
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{env.AWS_ROLE_ARN}}
+          role-to-assume: ${{env.AWS_OIDC_ROLE_ARN}}
           role-session-name: aws-oidc-${{github.repository.name}}-${{github.run_id}}
           aws-region: ${{env.AWS_DEFAULT_REGION}}
 
@@ -49,7 +49,7 @@ jobs:
       - name: 'extract version from dockerfile'
         id: extract_version
         run: |
-          DOCKER_TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile)
+          DOCKER_TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.DOCKER_IMAGE}}/Dockerfile)
           echo "DOCKER_TAG=${DOCKER_TAG#v}" >> $GITHUB_ENV
           echo "DOCKER_TAG=${DOCKER_TAG#v}"
 
@@ -57,4 +57,4 @@ jobs:
         uses: docker/bake-action@v5
         with:
           targets: push
-          workdir: ./${{env.IMAGE}}
+          workdir: ./${{env.DOCKER_IMAGE}}

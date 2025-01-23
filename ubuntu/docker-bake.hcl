@@ -1,12 +1,12 @@
-variable "AWS_ECR_PUBLIC_URI" {
+variable "AWS_ECR_URI" {
   default = "public.ecr.aws/w2u0w5i6"
 }
 
-variable "GROUP" {
+variable "DOCKER_GROUP" {
   default = "base"
 }
 
-variable "IMAGE" {
+variable "DOCKER_IMAGE" {
   default = "ubuntu"
 }
 
@@ -41,8 +41,8 @@ target "build" {
   inherits = ["settings"]
   output   = ["type=docker"]
   tags = [
-    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
-    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:latest",
+    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
   ]
 }
 
@@ -54,7 +54,7 @@ target "push" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:latest",
-    "${AWS_ECR_PUBLIC_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:latest",
+    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
   ]
 }

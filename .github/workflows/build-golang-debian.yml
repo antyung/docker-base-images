@@ -10,9 +10,10 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE: golang
+  DOCKER_IMAGE: golang
+  DOCKER_GROUP: base
   AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
-  AWS_ROLE_ARN: ${{secrets.AWS_ROLE_ARN}}
+  AWS_OIDC_ROLE_ARN: ${{secrets.AWS_OIDC_ROLE_ARN}}
 
 permissions:
   id-token: write
@@ -36,7 +37,7 @@ jobs:
       - name: 'configure aws credentials'
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{env.AWS_ROLE_ARN}}
+          role-to-assume: ${{env.AWS_OIDC_ROLE_ARN}}
           role-session-name: aws-oidc-${{github.repository.name}}-${{github.run_id}}
           aws-region: ${{env.AWS_DEFAULT_REGION}}
 
@@ -49,15 +50,19 @@ jobs:
       - name: 'extract version from dockerfile'
         id: extract_version
         run: |
-          DOCKER_TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.IMAGE}}/Dockerfile.debian)
+          DOCKER_TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.DOCKER_IMAGE}}/Dockerfile.debian)
           echo "DOCKER_TAG=${DOCKER_TAG#v}" >> $GITHUB_ENV
           echo "DOCKER_TAG=${DOCKER_TAG#v}"
-          IMAGE_BASE=$(sed -n 's/^FROM .*:\([^ -]*\)-\([^ -]*\).*/\2/p' ./${{env.IMAGE}}/Dockerfile.debian)
+          IMAGE_BASE=$(sed -n 's/^FROM .*:\([^ -]*\)-\([^ -]*\).*/\2/p' ./${{env.DOCKER_IMAGE}}/Dockerfile.debian)
           echo "IMAGE_BASE=${IMAGE_BASE}" >> $GITHUB_ENV
           echo "IMAGE_BASE=${IMAGE_BASE}"
+
+      - name: 'create ecr-public repository'
+        run: |
+          aws ecr-public create-repository --repository-name ${{env.DOCKER_GROUP}}/${{env.DOCKER_IMAGE}} --region us-east-1 || true
 
       - name: 'push'
         uses: docker/bake-action@v5
         with:
           targets: push-debian
-          workdir: ./${{env.IMAGE}}
+          workdir: ./${{env.DOCKER_IMAGE}}

@@ -15,15 +15,23 @@ updates:
       interval: weekly
     commit-message:
       prefix: "ci"
-      include: "scope"
+      include: "core"
 
   - package-ecosystem: devcontainers
     directory: "/"
     schedule:
       interval: weekly
     commit-message:
-      prefix: "chore"
-      include: "scope"
+      prefix: "build"
+      include: "devtools"
+
+  - package-ecosystem: gomod
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "test"
+      include: "devtools"
 
   - package-ecosystem: docker
     directories:
@@ -37,6 +45,6 @@ updates:
     schedule:
       interval: daily
     commit-message:
-      prefix: "chore"
-      include: "scope"
+      prefix: "build"
+      include: "upgrade"
     registries: ["dockerhub-registry"]
