@@ -19,10 +19,10 @@ func TestBuildDebian(t *testing.T) {
 			PrintBuildLog: true,
 		},
 	}
-	alpineContainer, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: req,
 		Started:          true,
 	})
-	testcontainers.CleanupContainer(t, alpineContainer)
+	testcontainers.CleanupContainer(t, container)
 	require.NoError(t, e)
 }
