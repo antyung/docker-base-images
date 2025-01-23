@@ -8,7 +8,7 @@ The repository is configured to automatically update and rebuild Docker images u
 
 [https://gallery.ecr.aws/w2u0w5i6](https://gallery.ecr.aws/w2u0w5i6)
 
-# tests
+## tests
 
 Use the go test -run flag to run a specific test, `-run regexp` Run only those tests and examples matching the regular expression.
 
