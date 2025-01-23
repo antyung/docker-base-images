@@ -57,8 +57,8 @@ target "build" {
   dockerfile = "Dockerfile.alpine"
   output   = ["type=docker"]
   tags = [
-    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:latest",
-    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:latest",
+    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
   ]
 }
 
@@ -71,9 +71,9 @@ target "push-alpine" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:latest",
-    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}",
-    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}-alpine",
+    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:latest",
+    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-alpine",
   ]
 }
 
@@ -86,6 +86,6 @@ target "push-debian" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_URI}/${GROUP}/${IMAGE}:${DOCKER_TAG}-${IMAGE_BASE}",
+    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-${IMAGE_BASE}",
   ]
 }
