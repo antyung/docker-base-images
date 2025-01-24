@@ -23,7 +23,7 @@ var Debian = struct {
 
 func TestBuildDebian(t *testing.T) {
 	ctx := context.Background()
-	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			FromDockerfile: testcontainers.FromDockerfile{
 				Context:       "../" + Debian.DOCKER_IMAGE + "/",
@@ -35,17 +35,17 @@ func TestBuildDebian(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	defer build.Terminate(ctx)
+	container.Terminate(ctx)
 }
 
 func TestPullDebian(t *testing.T) {
 	ctx := context.Background()
-	pull, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			Image: Debian.AWS_ECR_URI + "/" + Debian.DOCKER_IMAGE_GROUP + "/" + Debian.DOCKER_IMAGE + ":" + Debian.DOCKER_TAG,
 		},
 		Started: false,
 	})
 	require.NoError(t, e)
-	defer pull.Terminate(ctx)
+	container.Terminate(ctx)
 }

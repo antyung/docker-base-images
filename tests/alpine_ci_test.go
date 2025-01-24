@@ -23,7 +23,7 @@ var AlpineCi = struct {
 
 func TestBuildAlpineCi(t *testing.T) {
 	ctx := context.Background()
-	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			FromDockerfile: testcontainers.FromDockerfile{
 				Context:       "../" + AlpineCi.DOCKER_IMAGE + "/",
@@ -35,17 +35,17 @@ func TestBuildAlpineCi(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	defer build.Terminate(ctx)
+	container.Terminate(ctx)
 }
 
 func TestPullAlpineCi(t *testing.T) {
 	ctx := context.Background()
-	pull, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			Image: AlpineCi.AWS_ECR_URI + "/" + AlpineCi.DOCKER_IMAGE_GROUP + "/" + AlpineCi.DOCKER_IMAGE + ":" + AlpineCi.DOCKER_TAG,
 		},
 		Started: false,
 	})
 	require.NoError(t, e)
-	defer pull.Terminate(ctx)
+	container.Terminate(ctx)
 }

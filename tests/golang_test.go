@@ -23,7 +23,7 @@ var Golang = struct {
 
 func TestBuildGolangAlpine(t *testing.T) {
 	ctx := context.Background()
-	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			FromDockerfile: testcontainers.FromDockerfile{
 				Context:       "../" + Golang.DOCKER_IMAGE + "/",
@@ -35,12 +35,12 @@ func TestBuildGolangAlpine(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	defer build.Terminate(ctx)
+	container.Terminate(ctx)
 }
 
 func TestBuildGolangDebian(t *testing.T) {
 	ctx := context.Background()
-	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			FromDockerfile: testcontainers.FromDockerfile{
 				Context:       "../" + Golang.DOCKER_IMAGE + "/",
@@ -52,17 +52,17 @@ func TestBuildGolangDebian(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	defer build.Terminate(ctx)
+	container.Terminate(ctx)
 }
 
 func TestPullGolang(t *testing.T) {
 	ctx := context.Background()
-	pull, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			Image: Golang.AWS_ECR_URI + "/" + Golang.DOCKER_IMAGE_GROUP + "/" + Golang.DOCKER_IMAGE + ":" + Golang.DOCKER_TAG,
 		},
 		Started: false,
 	})
 	require.NoError(t, e)
-	defer pull.Terminate(ctx)
+	container.Terminate(ctx)
 }

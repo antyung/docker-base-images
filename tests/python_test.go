@@ -23,7 +23,7 @@ var Python = struct {
 
 func TestBuildPythonAlpine(t *testing.T) {
 	ctx := context.Background()
-	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			FromDockerfile: testcontainers.FromDockerfile{
 				Context:       "../" + Python.DOCKER_IMAGE + "/",
@@ -35,12 +35,12 @@ func TestBuildPythonAlpine(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	defer build.Terminate(ctx)
+	container.Terminate(ctx)
 }
 
 func TestBuildPythonDebian(t *testing.T) {
 	ctx := context.Background()
-	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			FromDockerfile: testcontainers.FromDockerfile{
 				Context:       "../" + Python.DOCKER_IMAGE + "/",
@@ -52,17 +52,17 @@ func TestBuildPythonDebian(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	defer build.Terminate(ctx)
+	container.Terminate(ctx)
 }
 
 func TestPullPython(t *testing.T) {
 	ctx := context.Background()
-	pull, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
 			Image: Python.AWS_ECR_URI + "/" + Python.DOCKER_IMAGE_GROUP + "/" + Python.DOCKER_IMAGE + ":" + Python.DOCKER_TAG,
 		},
 		Started: false,
 	})
 	require.NoError(t, e)
-	defer pull.Terminate(ctx)
+	container.Terminate(ctx)
 }
