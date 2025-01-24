@@ -12,12 +12,14 @@ import (
 
 var Golang = struct {
 	DOCKER_IMAGE       string
-	DOCKER_IMAGE_GROUP string
+	DOCKER_TAG         string
 	AWS_ECR_URI        string
+	DOCKER_IMAGE_GROUP string
 }{
 	DOCKER_IMAGE:       "golang",
-	DOCKER_IMAGE_GROUP: "base",
+	DOCKER_TAG:         "latest",
 	AWS_ECR_URI:        "public.ecr.aws/w2u0w5i6",
+	DOCKER_IMAGE_GROUP: "base",
 }
 
 func TestBuildGolangAlpine(t *testing.T) {
@@ -59,7 +61,7 @@ func TestBuildGolangDebian(t *testing.T) {
 func TestPullGolang(t *testing.T) {
 	ctx := context.Background()
 	req := testcontainers.ContainerRequest{
-		Image: fmt.Sprintf("%s/%s/%s:latest", Golang.AWS_ECR_URI, Golang.DOCKER_IMAGE_GROUP, Golang.DOCKER_IMAGE),
+		Image: fmt.Sprintf("%s/%s/%s:%s", Golang.AWS_ECR_URI, Golang.DOCKER_IMAGE_GROUP, Golang.DOCKER_IMAGE, Golang.DOCKER_TAG),
 	}
 	container, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: req,
