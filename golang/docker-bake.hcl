@@ -1,21 +1,21 @@
-variable "AWS_ECR_URI" {
-  default = "public.ecr.aws/w2u0w5i6"
-}
-
-variable "DOCKER_GROUP" {
-  default = "base"
-}
-
 variable "DOCKER_IMAGE" {
   default = "golang"
 }
 
-variable "IMAGE_BASE" {
-  default = ""
-}
-
 variable "DOCKER_TAG" {
   default = "latest"
+}
+
+variable "AWS_ECR_URI" {
+  default = "public.ecr.aws/w2u0w5i6"
+}
+
+variable "DOCKER_IMAGE_GROUP" {
+  default = "base"
+}
+
+variable "DOCKER_IMAGE_OS" {
+  default = ""
 }
 
 group "default" {
@@ -57,8 +57,8 @@ target "build" {
   dockerfile = "Dockerfile.alpine"
   output   = ["type=docker"]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:latest",
-    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
   ]
 }
 
@@ -71,9 +71,9 @@ target "push-alpine" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:latest",
-    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
-    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-alpine",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-alpine",
   ]
 }
 
@@ -86,6 +86,6 @@ target "push-debian" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-${IMAGE_BASE}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-${DOCKER_IMAGE_OS}",
   ]
 }

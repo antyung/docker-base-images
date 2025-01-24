@@ -12,24 +12,6 @@ The repository is configured to automatically update and rebuild Docker images u
 
 Use the `go test -run` flag to run a specific test, `-run '<regexp>'` run only those tests and examples matching the regular expression.
 
-test all builds
 ```
 go test -run 'TestBuild.*' ./... -v
-```
-test all `base` stage
-
-```
-go test -run 'TestBuildBase.*' ./... -v
-```
-
-test all `build` stage
-
-```
-go test -run 'TestBuildBuild.*' ./... -v
-```
-
-test all `final` stage
-
-```
-go test -run 'TestBuildFinal.*' ./... -v
 ```
