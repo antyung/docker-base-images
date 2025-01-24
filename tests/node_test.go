@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -21,28 +22,47 @@ var Node = struct {
 }
 
 func TestBuildNodeAlpine(t *testing.T) {
-	build := testcontainers.FromDockerfile{
-		Context:    "../" + Node.DOCKER_IMAGE + "/",
-		Dockerfile: "Dockerfile.alpine",
-		// KeepImage:     false,
-		// PrintBuildLog: true,
-	}
-	require.NotNil(t, build)
+	ctx := context.Background()
+	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			FromDockerfile: testcontainers.FromDockerfile{
+				Context:       "../" + Node.DOCKER_IMAGE + "/",
+				Dockerfile:    "Dockerfile.alpine",
+				KeepImage:     false,
+				PrintBuildLog: true,
+			},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	defer build.Terminate(ctx)
 }
 
 func TestBuildNodeDebian(t *testing.T) {
-	build := testcontainers.FromDockerfile{
-		Context:    "../" + Node.DOCKER_IMAGE + "/",
-		Dockerfile: "Dockerfile.debian",
-		// KeepImage:     false,
-		// PrintBuildLog: true,
-	}
-	require.NotNil(t, build)
+	ctx := context.Background()
+	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			FromDockerfile: testcontainers.FromDockerfile{
+				Context:       "../" + Node.DOCKER_IMAGE + "/",
+				Dockerfile:    "Dockerfile.debian",
+				KeepImage:     false,
+				PrintBuildLog: true,
+			},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	defer build.Terminate(ctx)
 }
 
 func TestPullNode(t *testing.T) {
-	pull := testcontainers.ContainerRequest{
-		Image: Node.AWS_ECR_URI + "/" + Node.DOCKER_IMAGE_GROUP + "/" + Node.DOCKER_IMAGE + ":" + Node.DOCKER_TAG,
-	}
-	require.NotNil(t, pull)
+	ctx := context.Background()
+	pull, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: Node.AWS_ECR_URI + "/" + Node.DOCKER_IMAGE_GROUP + "/" + Node.DOCKER_IMAGE + ":" + Node.DOCKER_TAG,
+		},
+		Started: false,
+	})
+	require.NoError(t, e)
+	defer pull.Terminate(ctx)
 }

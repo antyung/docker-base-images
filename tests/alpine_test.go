@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -21,18 +22,30 @@ var Alpine = struct {
 }
 
 func TestBuildAlpine(t *testing.T) {
-	build := testcontainers.FromDockerfile{
-		Context:    "../" + Alpine.DOCKER_IMAGE + "/",
-		Dockerfile: "Dockerfile",
-		// KeepImage:     false,
-		// PrintBuildLog: true,
-	}
-	require.NotNil(t, build)
+	ctx := context.Background()
+	build, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			FromDockerfile: testcontainers.FromDockerfile{
+				Context:       "../" + Alpine.DOCKER_IMAGE + "/",
+				Dockerfile:    "Dockerfile",
+				KeepImage:     false,
+				PrintBuildLog: true,
+			},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	defer build.Terminate(ctx)
 }
 
 func TestPullAlpine(t *testing.T) {
-	pull := testcontainers.ContainerRequest{
-		Image: Alpine.AWS_ECR_URI + "/" + Alpine.DOCKER_IMAGE_GROUP + "/" + Alpine.DOCKER_IMAGE + ":" + Alpine.DOCKER_TAG,
-	}
-	require.NotNil(t, pull)
+	ctx := context.Background()
+	pull, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: Alpine.AWS_ECR_URI + "/" + Alpine.DOCKER_IMAGE_GROUP + "/" + Alpine.DOCKER_IMAGE + ":" + Alpine.DOCKER_TAG,
+		},
+		Started: false,
+	})
+	require.NoError(t, e)
+	defer pull.Terminate(ctx)
 }
