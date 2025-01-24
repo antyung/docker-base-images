@@ -35,7 +35,7 @@ func TestBuildNodeAlpine(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
 
 func TestBuildNodeDebian(t *testing.T) {
@@ -52,7 +52,7 @@ func TestBuildNodeDebian(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
 
 func TestPullNode(t *testing.T) {
@@ -64,5 +64,5 @@ func TestPullNode(t *testing.T) {
 		Started: false,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }

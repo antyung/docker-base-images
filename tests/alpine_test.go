@@ -35,7 +35,7 @@ func TestBuildAlpine(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
 
 func TestPullAlpine(t *testing.T) {
@@ -47,5 +47,5 @@ func TestPullAlpine(t *testing.T) {
 		Started: false,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }

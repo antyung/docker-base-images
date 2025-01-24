@@ -35,7 +35,7 @@ func TestBuildGolangAlpine(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
 
 func TestBuildGolangDebian(t *testing.T) {
@@ -52,7 +52,7 @@ func TestBuildGolangDebian(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
 
 func TestPullGolang(t *testing.T) {
@@ -64,5 +64,5 @@ func TestPullGolang(t *testing.T) {
 		Started: false,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }

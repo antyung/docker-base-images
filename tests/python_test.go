@@ -35,7 +35,7 @@ func TestBuildPythonAlpine(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
 
 func TestBuildPythonDebian(t *testing.T) {
@@ -52,7 +52,7 @@ func TestBuildPythonDebian(t *testing.T) {
 		Started: true,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
 
 func TestPullPython(t *testing.T) {
@@ -64,5 +64,5 @@ func TestPullPython(t *testing.T) {
 		Started: false,
 	})
 	require.NoError(t, e)
-	container.Terminate(ctx)
+	testcontainers.CleanupContainer(t, container)
 }
