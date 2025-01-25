@@ -39,6 +39,7 @@ target "test" {
 
 target "build" {
   inherits = ["settings"]
+  dockerfile = "Dockerfile.ubuntu"
   output   = ["type=docker"]
   tags = [
     "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
@@ -48,6 +49,7 @@ target "build" {
 
 target "push" {
   inherits = ["settings"]
+  dockerfile = "Dockerfile.ubuntu"
   output   = ["type=registry"]
   platforms = [
     "linux/amd64",
