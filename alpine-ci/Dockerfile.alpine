@@ -8,9 +8,6 @@ RUN apk add --no-cache sudo bash bash-completion git aws-cli curl ca-certificate
     && rm -rf /var/cache/apk/* \
     && ln -s /var/cache/apk /etc/apk/cache
 
-RUN sed -i 's#/bin/sh#/bin/bash#' /etc/passwd \
-    && echo "complete -C $(which aws_completer) aws" > /etc/bash_completion.d/aws_completer.bash
-
 ENV TZ="Asia/Singapore" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
