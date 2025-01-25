@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - 'node/Dockerfile.debian'
+      - 'node/docker-bake.hcl'
     types:
       - opened
       - synchronize

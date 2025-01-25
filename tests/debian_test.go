@@ -49,3 +49,16 @@ func TestPullDebian(t *testing.T) {
 	require.NoError(t, e)
 	testcontainers.CleanupContainer(t, container)
 }
+
+func TestExecDebian(t *testing.T) {
+	ctx := context.Background()
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: Debian.AWS_ECR_URI + "/" + Debian.DOCKER_IMAGE_GROUP + "/" + Debian.DOCKER_IMAGE + ":" + Debian.DOCKER_TAG,
+			Cmd:   []string{"echo", "hello-world!"},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	testcontainers.CleanupContainer(t, container)
+}

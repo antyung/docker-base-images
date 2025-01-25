@@ -6,7 +6,8 @@ on:
     branches:
       - main
     paths:
-      - 'debian/**'
+      - 'debian/Dockerfile.debian'
+      - 'debian/docker-bake.hcl'
     types:
       - opened
       - synchronize

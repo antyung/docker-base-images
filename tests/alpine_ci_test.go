@@ -49,3 +49,16 @@ func TestPullAlpineCi(t *testing.T) {
 	require.NoError(t, e)
 	testcontainers.CleanupContainer(t, container)
 }
+
+func TestExecAlpineCi(t *testing.T) {
+	ctx := context.Background()
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: AlpineCi.AWS_ECR_URI + "/" + AlpineCi.DOCKER_IMAGE_GROUP + "/" + AlpineCi.DOCKER_IMAGE + ":" + AlpineCi.DOCKER_TAG,
+			Cmd:   []string{"aws", "--version"},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	testcontainers.CleanupContainer(t, container)
+}

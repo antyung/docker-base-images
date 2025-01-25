@@ -6,7 +6,8 @@ on:
     branches:
       - main
     paths:
-      - 'ubuntu/**'
+      - 'ubuntu/Dockerfile.ubuntu'
+      - 'ubuntu/docker-bake.hcl'
     types:
       - opened
       - synchronize

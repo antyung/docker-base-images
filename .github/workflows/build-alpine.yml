@@ -6,7 +6,8 @@ on:
     branches:
       - main
     paths:
-      - 'alpine/**'
+      - 'alpine/Dockerfile.alpine'
+      - 'alpine/docker-bake.hcl'
   workflow_dispatch:
 
 env:
@@ -50,7 +51,7 @@ jobs:
 
         id: extract_version
         run: |
-          DOCKER_TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.DOCKER_IMAGE}}/Dockerfile)
+          DOCKER_TAG=$(sed -n 's/^FROM .*:\([^ -]*\).*/\1/p' ./${{env.DOCKER_IMAGE}}/Dockerfile.alpine)
           echo "DOCKER_TAG=${DOCKER_TAG#v}" >> $GITHUB_ENV
           echo "DOCKER_TAG=${DOCKER_TAG#v}"
 

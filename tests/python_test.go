@@ -66,3 +66,16 @@ func TestPullPython(t *testing.T) {
 	require.NoError(t, e)
 	testcontainers.CleanupContainer(t, container)
 }
+
+func TestExecPython(t *testing.T) {
+	ctx := context.Background()
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: Python.AWS_ECR_URI + "/" + Python.DOCKER_IMAGE_GROUP + "/" + Python.DOCKER_IMAGE + ":" + Python.DOCKER_TAG,
+			Cmd:   []string{"python", "--version"},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	testcontainers.CleanupContainer(t, container)
+}

@@ -6,7 +6,8 @@ on:
     branches:
       - main
     paths:
-      - 'alpine-ci/**'
+      - 'alpine-ci/Dockerfile.alpine'
+      - 'alpine-ci/docker-bake.hcl'
     types:
       - opened
       - synchronize

@@ -66,3 +66,16 @@ func TestPullGolang(t *testing.T) {
 	require.NoError(t, e)
 	testcontainers.CleanupContainer(t, container)
 }
+
+func TestExecGolang(t *testing.T) {
+	ctx := context.Background()
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: Golang.AWS_ECR_URI + "/" + Golang.DOCKER_IMAGE_GROUP + "/" + Golang.DOCKER_IMAGE + ":" + Golang.DOCKER_TAG,
+			Cmd:   []string{"go", "--version"},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	testcontainers.CleanupContainer(t, container)
+}
