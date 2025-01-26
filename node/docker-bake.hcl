@@ -14,10 +14,6 @@ variable "DOCKER_IMAGE_GROUP" {
   default = "base"
 }
 
-variable "DOCKER_IMAGE_OS" {
-  default = ""
-}
-
 group "default" {
   targets = ["build"]
 }
@@ -86,6 +82,6 @@ target "push-debian" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-${DOCKER_IMAGE_OS}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-debian",
   ]
 }

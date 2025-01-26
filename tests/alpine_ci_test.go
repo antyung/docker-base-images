@@ -27,7 +27,7 @@ func TestBuildAlpineCi(t *testing.T) {
 		ContainerRequest: testcontainers.ContainerRequest{
 			FromDockerfile: testcontainers.FromDockerfile{
 				Context:       "../" + AlpineCi.DOCKER_IMAGE + "/",
-				Dockerfile:    "Dockerfile",
+				Dockerfile:    "Dockerfile.alpine",
 				KeepImage:     false,
 				PrintBuildLog: true,
 			},
