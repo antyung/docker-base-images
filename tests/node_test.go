@@ -21,7 +21,7 @@ var Node = struct {
 	DOCKER_IMAGE_GROUP: "base",
 }
 
-func TestBuildNodeAlpine(t *testing.T) {
+func TestContainerBuildNodeAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -38,7 +38,7 @@ func TestBuildNodeAlpine(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestBuildNodeDebian(t *testing.T) {
+func TestContainerBuildNodeDebian(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -55,7 +55,7 @@ func TestBuildNodeDebian(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestPullNode(t *testing.T) {
+func TestContainerPullNode(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -67,7 +67,7 @@ func TestPullNode(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestExecNode(t *testing.T) {
+func TestContainerExecNode(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{

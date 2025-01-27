@@ -21,7 +21,7 @@ var Python = struct {
 	DOCKER_IMAGE_GROUP: "base",
 }
 
-func TestBuildPythonAlpine(t *testing.T) {
+func TestContainerBuildPythonAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -38,7 +38,7 @@ func TestBuildPythonAlpine(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestBuildPythonDebian(t *testing.T) {
+func TestContainerBuildPythonDebian(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -55,7 +55,7 @@ func TestBuildPythonDebian(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestPullPython(t *testing.T) {
+func TestContainerPullPython(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -67,7 +67,7 @@ func TestPullPython(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestExecPython(t *testing.T) {
+func TestContainerExecPython(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{

@@ -21,7 +21,7 @@ var Ubuntu = struct {
 	DOCKER_IMAGE_GROUP: "base",
 }
 
-func TestBuildUbuntu(t *testing.T) {
+func TestContainerBuildUbuntu(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -38,7 +38,7 @@ func TestBuildUbuntu(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestPullUbuntu(t *testing.T) {
+func TestContainerPullUbuntu(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -50,7 +50,7 @@ func TestPullUbuntu(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestExecUbuntu(t *testing.T) {
+func TestContainerExecUbuntu(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{

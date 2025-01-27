@@ -21,7 +21,7 @@ var Alpine = struct {
 	DOCKER_IMAGE_GROUP: "base",
 }
 
-func TestBuildAlpine(t *testing.T) {
+func TestContainerBuildAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -38,7 +38,7 @@ func TestBuildAlpine(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestPullAlpine(t *testing.T) {
+func TestContainerPullAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -50,7 +50,7 @@ func TestPullAlpine(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestExecAlpine(t *testing.T) {
+func TestContainerExecAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{

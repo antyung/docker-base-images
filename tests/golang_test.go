@@ -21,7 +21,7 @@ var Golang = struct {
 	DOCKER_IMAGE_GROUP: "base",
 }
 
-func TestBuildGolangAlpine(t *testing.T) {
+func TestContainerBuildGolangAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -38,7 +38,7 @@ func TestBuildGolangAlpine(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestBuildGolangDebian(t *testing.T) {
+func TestContainerBuildGolangDebian(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -55,7 +55,7 @@ func TestBuildGolangDebian(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestPullGolang(t *testing.T) {
+func TestContainerPullGolang(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -67,7 +67,7 @@ func TestPullGolang(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestExecGolang(t *testing.T) {
+func TestContainerExecGolang(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{

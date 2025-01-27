@@ -21,7 +21,7 @@ var Debian = struct {
 	DOCKER_IMAGE_GROUP: "base",
 }
 
-func TestBuildDebian(t *testing.T) {
+func TestContainerBuildDebian(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -38,7 +38,7 @@ func TestBuildDebian(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestPullDebian(t *testing.T) {
+func TestContainerPullDebian(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
@@ -50,7 +50,7 @@ func TestPullDebian(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
-func TestExecDebian(t *testing.T) {
+func TestContainerExecDebian(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
