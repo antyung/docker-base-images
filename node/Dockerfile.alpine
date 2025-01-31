@@ -7,9 +7,4 @@ USER root
 ENV TZ=Asia/Singapore \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
-    LC_ALL=en_US.UTF-8 \
-    PNPM_HOME=/opt/pnpm
-
-ENV PATH="${PNPM_HOME}:${PATH}"
-
-RUN npm install -g pnpm
+    LC_ALL=en_US.UTF-8
