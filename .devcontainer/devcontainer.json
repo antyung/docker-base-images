@@ -1,5 +1,5 @@
 {
-  "image": "ghcr.io/antyung/devcontainers/ubuntu:jammy",
+  "image": "public.ecr.aws/w2u0w5i6/devcontainer/ubuntu-base:jammy",
   "name": "docker-base-images",
   "features": {
       "ghcr.io/antyung/devcontainers/common-utils:1": {},
@@ -14,5 +14,5 @@
   },
   "containerUser": "vscode",
   "workspaceMount": "source=${localWorkspaceFolder}/,target=/home/vscode/docker-base-images,type=bind,consistency=cached", "workspaceFolder": "/home/vscode",
-  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/docker-base-images"
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode"
 }

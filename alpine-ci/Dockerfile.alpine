@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker.io/docker/dockerfile:1
 
 FROM docker.io/alpine:3.21 AS base
 
@@ -8,7 +8,7 @@ RUN apk add --no-cache sudo bash bash-completion git aws-cli curl ca-certificate
     && rm -rf /var/cache/apk/* \
     && ln -s /var/cache/apk /etc/apk/cache
 
-ENV TZ="Asia/Singapore" \
-    LANG="en_US.UTF-8" \
-    LANGUAGE="en_US:en" \
-    LC_ALL="en_US.UTF-8"
+ENV TZ=Asia/Singapore \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8

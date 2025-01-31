@@ -1,20 +1,20 @@
 ---
-name: 'pr-build python-debian'
+name: 'PR Test Build node-debian'
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - 'python/Dockerfile.debian'
-      - 'python/docker-bake.hcl'
+      - 'node/Dockerfile.debian'
+      - 'node/docker-bake.hcl'
     types:
       - opened
       - synchronize
       - reopened
 
 env:
-  DOCKER_IMAGE: python
+  DOCKER_IMAGE: node
   GH_TOKEN: ${{secrets.GH_TOKEN}}
 
 permissions:
@@ -22,7 +22,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  test-build:
     runs-on: ubuntu-latest
     if: ${{github.actor == 'dependabot[bot]'}}
     steps:
@@ -37,7 +37,7 @@ jobs:
       - name: 'set up docker buildx'
         uses: docker/setup-buildx-action@v3
 
-      - name: 'test'
+      - name: 'test-build'
         uses: docker/bake-action@v5
         with:
           targets: test-debian

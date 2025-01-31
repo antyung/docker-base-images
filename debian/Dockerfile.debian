@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker.io/docker/dockerfile:1
 
 FROM docker.io/debian:bullseye AS base
 
@@ -9,7 +9,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV TZ="Asia/Singapore" \
-    LANG="en_US.UTF-8" \
-    LANGUAGE="en_US:en" \
-    LC_ALL="en_US.UTF-8"
+ENV TZ=Asia/Singapore \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8

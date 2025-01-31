@@ -1,5 +1,5 @@
 ---
-name: 'build alpine'
+name: 'Build Push alpine'
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
 env:
   DOCKER_IMAGE: alpine
   DOCKER_IMAGE_GROUP: base
-  AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+  AWS_DEFAULT_REGION: us-east-1
   AWS_OIDC_ROLE_ARN: ${{secrets.AWS_OIDC_ROLE_ARN}}
 
 permissions:
@@ -57,9 +57,9 @@ jobs:
 
       - name: 'create ecr-public repository'
         run: |
-          aws ecr-public create-repository --repository-name ${{env.DOCKER_IMAGE_GROUP}}/${{env.DOCKER_IMAGE}} --region us-east-1 || true
+          aws ecr-public create-repository --repository-name ${{env.DOCKER_IMAGE_GROUP}}/${{env.DOCKER_IMAGE}} --region ${{env.AWS_DEFAULT_REGION}} || true
 
-      - name: 'push'
+      - name: 'build-push'
         uses: docker/bake-action@v5
         with:
           targets: push

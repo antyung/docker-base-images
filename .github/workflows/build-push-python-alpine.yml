@@ -1,18 +1,19 @@
 ---
-name: 'build alpine-ci'
+name: 'Build Push python-alpine'
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'alpine-ci/Dockerfile.alpine'
-      - 'alpine-ci/docker-bake.hcl'
+      - 'python/Dockerfile.alpine'
+      - 'python/docker-bake.hcl'
   workflow_dispatch:
 
 env:
-  DOCKER_IMAGE: alpine-ci
-  AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+  DOCKER_IMAGE: python
+  DOCKER_IMAGE_GROUP: base
+  AWS_DEFAULT_REGION: us-east-1
   AWS_OIDC_ROLE_ARN: ${{secrets.AWS_OIDC_ROLE_ARN}}
 
 permissions:
@@ -54,8 +55,12 @@ jobs:
           echo "DOCKER_TAG=${DOCKER_TAG#v}" >> $GITHUB_ENV
           echo "DOCKER_TAG=${DOCKER_TAG#v}"
 
-      - name: 'push'
+      - name: 'create ecr-public repository'
+        run: |
+          aws ecr-public create-repository --repository-name ${{env.DOCKER_IMAGE_GROUP}}/${{env.DOCKER_IMAGE}} --region ${{env.AWS_DEFAULT_REGION}} || true
+
+      - name: 'build-push'
         uses: docker/bake-action@v5
         with:
-          targets: push
+          targets: push-alpine
           workdir: ./${{env.DOCKER_IMAGE}}
