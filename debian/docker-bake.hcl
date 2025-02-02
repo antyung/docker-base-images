@@ -30,6 +30,17 @@ target "settings" {
 
 target "test" {
   inherits = ["settings"]
+  dockerfile = "Dockerfile.debian"
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+  ]
+  tags = []
+}
+
+target "test-slim" {
+  inherits = ["settings"]
+  dockerfile = "Dockerfile.debian-slim"
   platforms = [
     "linux/amd64",
     "linux/arm64",
@@ -42,8 +53,17 @@ target "build" {
   dockerfile = "Dockerfile.debian"
   output   = ["type=docker"]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
     "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+  ]
+}
+
+target "build-slim" {
+  inherits = ["settings"]
+  dockerfile = "Dockerfile.debian-slim"
+  output   = ["type=docker"]
+  tags = [
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-slim",
   ]
 }
 
@@ -56,7 +76,20 @@ target "push" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
     "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+  ]
+}
+
+target "push-slim" {
+  inherits = ["settings"]
+  dockerfile = "Dockerfile.debian-slim"
+  output   = ["type=registry"]
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+  ]
+  tags = [
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-slim",
   ]
 }

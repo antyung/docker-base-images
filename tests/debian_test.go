@@ -38,6 +38,23 @@ func TestContainerBuildDebian(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
+func TestContainerBuildDebianSlim(t *testing.T) {
+	ctx := context.Background()
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			FromDockerfile: testcontainers.FromDockerfile{
+				Context:       "../" + Debian.DOCKER_IMAGE + "/",
+				Dockerfile:    "Dockerfile.debian-slim",
+				KeepImage:     false,
+				PrintBuildLog: true,
+			},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	testcontainers.CleanupContainer(t, container)
+}
+
 func TestContainerPullDebian(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
@@ -50,7 +67,32 @@ func TestContainerPullDebian(t *testing.T) {
 	testcontainers.CleanupContainer(t, container)
 }
 
+func TestContainerPullDebianSlim(t *testing.T) {
+	ctx := context.Background()
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: Debian.AWS_ECR_URI + "/" + Debian.DOCKER_IMAGE_GROUP + "/" + Debian.DOCKER_IMAGE + ":" + Debian.DOCKER_TAG,
+		},
+		Started: false,
+	})
+	require.NoError(t, e)
+	testcontainers.CleanupContainer(t, container)
+}
+
 func TestContainerExecDebian(t *testing.T) {
+	ctx := context.Background()
+	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: testcontainers.ContainerRequest{
+			Image: Debian.AWS_ECR_URI + "/" + Debian.DOCKER_IMAGE_GROUP + "/" + Debian.DOCKER_IMAGE + ":" + Debian.DOCKER_TAG,
+			Cmd:   []string{"echo", "hello-world!"},
+		},
+		Started: true,
+	})
+	require.NoError(t, e)
+	testcontainers.CleanupContainer(t, container)
+}
+
+func TestContainerExecDebianSlim(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
