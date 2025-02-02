@@ -4,7 +4,7 @@ FROM docker.io/alpine:3.21 AS base
 
 USER root
 
-RUN apk add --no-cache sudo bash bash-completion git aws-cli curl ca-certificates jq \
+RUN apk add --no-cache sudo bash git aws-cli curl ca-certificates jq \
     && rm -rf /var/cache/apk/* \
     && ln -s /var/cache/apk /etc/apk/cache
 
