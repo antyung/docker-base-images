@@ -10,7 +10,7 @@ variable "DOCKER_IMAGE" {
   default = "ubuntu"
 }
 
-variable "DOCKER_TAG" {
+variable "DOCKER_IMAGE_TAG" {
   default = "latest"
 }
 
@@ -43,7 +43,7 @@ target "build" {
   output   = ["type=docker"]
   tags = [
     "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}",
   ]
 }
 
@@ -57,6 +57,6 @@ target "push" {
   ]
   tags = [
     "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}",
   ]
 }

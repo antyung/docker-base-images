@@ -11,12 +11,12 @@ import (
 
 var Alpine = struct {
 	DOCKER_IMAGE       string
-	DOCKER_TAG         string
+	DOCKER_IMAGE_TAG   string
 	AWS_ECR_URI        string
 	DOCKER_IMAGE_GROUP string
 }{
 	DOCKER_IMAGE:       "alpine",
-	DOCKER_TAG:         "latest",
+	DOCKER_IMAGE_TAG:   "latest",
 	AWS_ECR_URI:        "public.ecr.aws/w2u0w5i6",
 	DOCKER_IMAGE_GROUP: "base",
 }
@@ -42,7 +42,7 @@ func TestContainerPullAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
-			Image: Alpine.AWS_ECR_URI + "/" + Alpine.DOCKER_IMAGE_GROUP + "/" + Alpine.DOCKER_IMAGE + ":" + Alpine.DOCKER_TAG,
+			Image: Alpine.AWS_ECR_URI + "/" + Alpine.DOCKER_IMAGE_GROUP + "/" + Alpine.DOCKER_IMAGE + ":" + Alpine.DOCKER_IMAGE_TAG,
 		},
 		Started: false,
 	})
@@ -54,7 +54,7 @@ func TestContainerExecAlpine(t *testing.T) {
 	ctx := context.Background()
 	container, e := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
 		ContainerRequest: testcontainers.ContainerRequest{
-			Image: Alpine.AWS_ECR_URI + "/" + Alpine.DOCKER_IMAGE_GROUP + "/" + Alpine.DOCKER_IMAGE + ":" + Alpine.DOCKER_TAG,
+			Image: Alpine.AWS_ECR_URI + "/" + Alpine.DOCKER_IMAGE_GROUP + "/" + Alpine.DOCKER_IMAGE + ":" + Alpine.DOCKER_IMAGE_TAG,
 			Cmd:   []string{"echo", "hello-world!"},
 		},
 		Started: true,

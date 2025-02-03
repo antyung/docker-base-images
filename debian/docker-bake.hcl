@@ -2,7 +2,7 @@ variable "DOCKER_IMAGE" {
   default = "debian"
 }
 
-variable "DOCKER_TAG" {
+variable "DOCKER_IMAGE_TAG" {
   default = "latest"
 }
 
@@ -53,7 +53,7 @@ target "build" {
   dockerfile = "Dockerfile.debian"
   output   = ["type=docker"]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}",
   ]
 }
 
@@ -63,7 +63,7 @@ target "build-slim" {
   output   = ["type=docker"]
   tags = [
     "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-slim",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}-slim",
   ]
 }
 
@@ -76,7 +76,7 @@ target "push" {
     "linux/arm64",
   ]
   tags = [
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}",
   ]
 }
 
@@ -90,6 +90,6 @@ target "push-slim" {
   ]
   tags = [
     "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:latest",
-    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_TAG}-slim",
+    "${AWS_ECR_URI}/${DOCKER_IMAGE_GROUP}/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}-slim",
   ]
 }
